@@ -58,8 +58,10 @@ impl ThunderlordWrapper {
     }
 
     fn update(&mut self) {
-        if self.time_seconds >= 3.22 && self.state != FiringState::Stage3 {
-            self.state = FiringState::Stage3
+        if self.time_seconds >= 3.22 {
+            if self.state != FiringState::Stage3 {
+                self.state = FiringState::Stage3
+            }
         } else if self.time_seconds >= 0.96 && self.state != FiringState::Stage2 {
             self.state = FiringState::Stage2
         }
