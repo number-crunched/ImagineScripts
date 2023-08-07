@@ -90,5 +90,8 @@ fn thunderlord() -> ThunderlordWrapper {
 
 fn main() {
     let info = thunderlord();
+    let damage = info.shots as usize * 4_233 + info.lightning_strikes as usize * 10_269;
+    let dps = damage as f32 / info.time_seconds;
+    println!("damage: {}\ndps: {}", damage, dps);
     println!("{}", info)
 }
