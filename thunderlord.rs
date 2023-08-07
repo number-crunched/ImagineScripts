@@ -1,6 +1,3 @@
-
-use std::io::Write;
-
 const STAGE_1: f32 = 60.0 / 460.0;
 const STAGE_2: f32 = 60.0 / 620.68;
 const STAGE_3: f32 = 60.0 / 704.34;
@@ -68,6 +65,17 @@ impl ThunderlordWrapper {
     }
 }
 
+use std::fmt::{Display, Result, Formatter};
+impl Display for ThunderlordWrapper {
+    fn fmt(&self, f: &mut Formatter) -> Result {
+        write!(f, "shots fired: {}\nlightning strikes: {}\ntime seconds: {}",
+            self.shots,
+            self.lightning_strikes,
+            self.time_seconds,
+        )
+    }
+}
+
 fn thunderlord() -> ThunderlordWrapper {
     let mut thunderlord = ThunderlordWrapper::new();
 
@@ -80,14 +88,7 @@ fn thunderlord() -> ThunderlordWrapper {
     }
 }
 
-fn main() -> std::io::Result<()> {
+fn main() {
     let info = thunderlord();
-    std::io::stdout().write_all(
-        format!(
-            "\nshots fired: {}\nlightning strikes: {}\ntime: {}\n",
-            info.shots, info.lightning_strikes, info.time_seconds,
-        )
-        .as_bytes(),
-    )?;
-    Ok(())
+    println!("{}", info)
 }
